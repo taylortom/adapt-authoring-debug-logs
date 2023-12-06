@@ -1,0 +1,11 @@
+{
+  "name": "adapt-authoring-debug-logs",
+  "version": "0.0.1",
+  "description": "Debug logs",
+  "homepage": "https://github.com/taylortom/adapt-authoring-debug-logs",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "adapt-authoring-core": "git+https://github.com/adapt-security/adapt-authoring-core.git"
+  }
+}
