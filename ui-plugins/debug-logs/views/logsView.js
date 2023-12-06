@@ -9,7 +9,8 @@ define(function(require){
     events: {
       'change input': 'updateModel',
       'keydown input': 'updateModel',
-      'change': 'fetchPage'
+      'change': 'fetchPage',
+      'click .nav button': 'onNavClicked'
     },
 
     initialize: async function(options) {
@@ -73,6 +74,11 @@ define(function(require){
       } catch(e) {
         console.log(e);
       }
+    },
+
+    onNavClicked: function(e) {
+      // TODO fix double fetch (model set triggering updateModel)
+      this.model.set('page', this.model.get('page') + Number($(e.currentTarget).attr('data-value')))
     }
   }, {
     template: 'logs'

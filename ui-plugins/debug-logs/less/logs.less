@@ -3,24 +3,35 @@
 
 body.module-debug {
   .debug .view > .logs {
-    .filter {
+    .panel {
       position: fixed;
-      right: 10px;
-      width: 200px;
-      margin: 25px;
-      padding: 20px;
-      background: @tertiary-color;
-      border-radius: 3px;
-      color: white;
-      > div {
+      right: 0;
+      margin: 20px 30px;
+      width: 250px;
+      .nav {
         margin-bottom: 15px;
-        &:last-child {
-          margin-bottom: 0;
+        text-align: right;
+        button {
+          width: 40px;
+          background-color: @secondary-color;
+          color: white;
         }
-
-        & > h2 {
-          font-size: 110%;
-          margin-bottom: 10px;
+      }
+      .filter {
+        padding: 20px;
+        background: @tertiary-color;
+        border-radius: 3px;
+        color: white;
+        > div {
+          margin-bottom: 15px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+  
+          & > h2 {
+            font-size: 110%;
+            margin-bottom: 10px;
+          }
         }
       }
     }
