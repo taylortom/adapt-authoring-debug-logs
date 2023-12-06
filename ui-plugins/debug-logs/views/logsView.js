@@ -47,7 +47,6 @@ define(function(require){
       
       const attributes = {
         levels,
-        sort: { timestamp: 1 }
       };
       const moduleName = this.$('#module').val();
       if(moduleName) attributes.module = moduleName;
