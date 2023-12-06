@@ -1,9 +1,45 @@
 <div class="inner">
+  <div class="filter">
+    <div>
+      <h2>Module</h2>
+      <input id="module" type="text" value="{{module}}">
+    </div>
+    <div class="level">
+      <h2>Level</h2>
+      <div>
+        <input type="checkbox" id="error" name="error" {{#ifArrayIncludes levels 'error'}}checked{{/ifArrayIncludes}} />
+        <label for="error">error</label>
+      </div>
+      <div>
+        <input type="checkbox" id="warn" name="warn" {{#ifArrayIncludes levels 'warn'}}checked{{/ifArrayIncludes}} />
+        <label for="warn">warn</label>
+      </div>
+      <div>
+        <input type="checkbox" id="success" name="success" {{#ifArrayIncludes levels 'success'}}checked{{/ifArrayIncludes}} />
+        <label for="success">success</label>
+      </div>
+      <div>
+        <input type="checkbox" id="info" name="info" {{#ifArrayIncludes levels 'info'}}checked{{/ifArrayIncludes}} />
+        <label for="info">info</label>
+      </div>
+      <div>
+        <input type="checkbox" id="debug" name="debug" {{#ifArrayIncludes levels 'debug'}}checked{{/ifArrayIncludes}} />
+        <label for="debug">debug</label>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="prev"></button>
+    <button class="next"></button>
+  </div>
   <div class="logs-container">
     <div class="logs">
       {{#each logs}}
         <div class="log">
-          
+          <div class="timestamp">{{momentFormat timestamp "ddd DD/MM/YY  HH:mm:SS:SSS"}}</div>
+          <div class="level {{level}}">{{level}}</div>
+          <div class="module">{{module}}</div>
+          <div class="data">{{{data}}}</div>
         </div>
       {{/each}}
     </div>

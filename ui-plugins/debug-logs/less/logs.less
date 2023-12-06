@@ -2,7 +2,54 @@
 @import 'sharedStyles';
 
 body.module-debug {
-  .debug .logs {
-    
+  .debug .view > .logs {
+    .filter {
+      position: fixed;
+      right: 10px;
+      width: 200px;
+      margin: 25px;
+      padding: 20px;
+      background: @tertiary-color;
+      border-radius: 3px;
+      color: white;
+      > div {
+        margin-bottom: 15px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        & > h2 {
+          font-size: 110%;
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .log {
+      padding: 5px;
+      text-wrap: nowrap;
+      > div {
+        display: inline-block;
+        &.timestamp {
+          width: 180px 
+        }
+        &.level {
+          width: 75px;
+          font-weight: @font-weight-bold;
+          &.error { color: @alert-color; }
+          &.warn { color: @warning-color; }
+          &.success { color: @success-color; }
+          &.info { color: @info-color; }
+          &.debug { color: grey; }
+        }
+        &.module {
+          width: 125px;
+          font-weight: @font-weight-bold;
+          color: @secondary-color;
+        }
+        &.data {
+          font-family: monospace;
+        }
+      }
+    }
   }
 }
