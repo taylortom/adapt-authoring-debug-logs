@@ -68,7 +68,9 @@ define(function(require){
         if(this.model.has('module')) {
           data.module = this.model.get('module');
         }
-        this.model.set('logs', await $.post(`/api/logs/query?${query.join('&')}`, data));
+        const logData = await $.post(`/api/logs/query?${query.join('&')}`, data)
+        logData.forEach(l => l.data = JSON.stringify(l.data, null, 2))
+        this.model.set('logs', logData);
         this.render();
 
       } catch(e) {
