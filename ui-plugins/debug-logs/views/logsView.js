@@ -75,7 +75,7 @@ define(function(require){
         this.model.set('logs', logData);
         this.render();
 
-        this.fetchTimeout = setTimeout(5000, this.fetchPage);
+        this.fetchTimeout = setTimeout(this.fetchPage.bind(this), 5000);
 
       } catch(e) {
         console.log(e);
