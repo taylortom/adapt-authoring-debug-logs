@@ -19,20 +19,20 @@ define(function(require){
         page: 1,
         sort: { timestamp: -1 }
       });
-      this.listenTo(this.model, 'change', this.fetchPage)
+      this.listenTo(this.model, 'change:levels change:page change:sort', this.fetchPage)
 
       OriginView.prototype.initialize.apply(this, arguments);
-      
+
       this.fetchPage();
     },
 
     waitForTimeout: async function() {
       return new Promise(resolve => {
-        if(this.timeout) {
-          clearTimeout(this.timeout);
+        if(this.keyTimeout) {
+          clearTimeout(this.keyTimeout);
         }
-        this.timeout = setTimeout(() => {
-          this.timeout = undefined;
+        this.keyTimeout = setTimeout(() => {
+          this.keyTimeout = undefined;
           resolve();
         }, 500);
       })
@@ -57,6 +57,8 @@ define(function(require){
     },
 
     fetchPage: async function() {
+      clearTimeout(this.fetchTimeout)
+      
       try {
         const query = [
           `page=${this.model.get('page')}`,
@@ -72,6 +74,8 @@ define(function(require){
         logData.forEach(l => l.data = JSON.stringify(l.data, null, 2))
         this.model.set('logs', logData);
         this.render();
+
+        this.fetchTimeout = setTimeout(5000, this.fetchPage);
 
       } catch(e) {
         console.log(e);
