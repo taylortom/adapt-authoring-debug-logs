@@ -26,6 +26,11 @@ define(function(require){
       this.fetchPage();
     },
 
+    remove: function() {
+      clearTimeout(this.fetchTimeout);
+      OriginView.prototype.remove.apply(this, arguments);
+    }
+
     waitForTimeout: async function() {
       return new Promise(resolve => {
         if(this.keyTimeout) {
