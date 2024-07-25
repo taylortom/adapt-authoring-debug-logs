@@ -29,7 +29,7 @@ define(function(require){
     remove: function() {
       clearTimeout(this.fetchTimeout);
       OriginView.prototype.remove.apply(this, arguments);
-    }
+    },
 
     waitForTimeout: async function() {
       return new Promise(resolve => {
