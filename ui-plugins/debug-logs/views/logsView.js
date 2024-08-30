@@ -10,7 +10,8 @@ define(function(require){
       'change input': 'updateModel',
       'keydown input': 'updateModel',
       'change': 'fetchPage',
-      'click .nav button': 'onNavClicked'
+      'click .nav button': 'onNavClicked',
+      'click button.filter': 'onFilterClicked'
     },
 
     initialize: async function(options) {
@@ -24,6 +25,12 @@ define(function(require){
       OriginView.prototype.initialize.apply(this, arguments);
 
       this.fetchPage();
+    },
+
+    renderLogs: function() {
+      $logs = $('.logs-container > .logs');
+      $logs.empty();
+      this.model.get('logs').forEach(l => $logs.append(Handlebars.partials.part_log(l)));
     },
 
     remove: function() {
@@ -76,9 +83,9 @@ define(function(require){
           data.module = this.model.get('module');
         }
         const logData = await $.post(`/api/logs/query?${query.join('&')}`, data)
-        logData.forEach(l => l.data = JSON.stringify(l.data, null, 2))
+        logData.forEach(l => l.data = l.data.map(d => JSON.stringify(d, null, 2)))
         this.model.set('logs', logData);
-        this.render();
+        this.renderLogs();
 
         this.fetchTimeout = setTimeout(this.fetchPage.bind(this), 5000);
 
@@ -87,9 +94,16 @@ define(function(require){
       }
     },
 
+    onFilterClicked: function(e) {
+      $('.panel > .filter').toggle();
+    },
+
     onNavClicked: function(e) {
+      const val = $(e.currentTarget).attr('data-value');
       // TODO fix double fetch (model set triggering updateModel)
-      this.model.set('page', this.model.get('page') + Number($(e.currentTarget).attr('data-value')))
+      if(val) {
+        this.model.set('page', this.model.get('page') + Number(val))
+      }
     }
   }, {
     template: 'logs'
