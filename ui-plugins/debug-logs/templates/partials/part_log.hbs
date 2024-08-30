@@ -1,6 +1,8 @@
-<div class="log">
-  <div class="timestamp">{{momentFormat timestamp "ddd DD/MM/YY  HH:mm:SS:SSS"}}</div>
-  <div class="level {{level}}">{{level}}</div>
-  <div class="module">{{module}}</div>
-  <div class="data">{{{data}}}</div>
+<div class="log {{level}}">
+  <div class="header">
+    <div class="level {{level}}">{{level}}</div>
+    <div class="module">{{module}}</div>
+    <div class="timestamp">{{momentFormat timestamp "ddd DD/MM/YY  HH:mm:SS:SSS"}}</div>
+  </div>
+  <pre class="data">{{{data}}}</pre>
 </div>

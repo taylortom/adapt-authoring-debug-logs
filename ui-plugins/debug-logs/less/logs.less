@@ -3,6 +3,7 @@
 
 body.module-debug {
   .debug .view > .logs {
+    background-color: @tertiary-color;
     .panel {
       position: fixed;
       right: 0;
@@ -37,30 +38,47 @@ body.module-debug {
       }
     }
     .log {
-      padding: 5px;
-      text-wrap: nowrap;
-      > div {
-        display: inline-block;
-        &.timestamp {
-          width: 180px 
+      border: 1px solid black;
+      border-left-width: 10px;
+      &.error { border-color: @alert-color; }
+      &.warn { border-color: @warning-color; }
+      &.success { border-color: @success-color; }
+      &.info { border-color: @info-color; }
+      &.debug { border-color: grey; }
+
+      .header {
+        padding: 5px 10px;
+
+        > div {
+          display: inline-block;
         }
-        &.level {
+
+        .timestamp {
+          width: 180px;
+          color: white;
+        }
+        .level {
           width: 75px;
           font-weight: @font-weight-bold;
+          text-transform: uppercase;
           &.error { color: @alert-color; }
           &.warn { color: @warning-color; }
           &.success { color: @success-color; }
           &.info { color: @info-color; }
           &.debug { color: grey; }
         }
-        &.module {
+        .module {
           width: 125px;
           font-weight: @font-weight-bold;
+          text-transform: uppercase;
           color: @secondary-color;
         }
-        &.data {
-          font-family: monospace;
-        }
+      }
+      .data {
+        display: block;
+        padding: 10px;
+        white-space: pre;
+        color: white;
       }
     }
   }
