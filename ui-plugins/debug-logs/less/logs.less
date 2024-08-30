@@ -3,7 +3,6 @@
 
 body.module-debug {
   .debug .view > .logs {
-    background-color: @tertiary-color;
     .panel {
       position: fixed;
       right: 0;
@@ -40,6 +39,8 @@ body.module-debug {
     .log {
       border: 1px solid black;
       border-left-width: 10px;
+      margin: 10px;
+      background-color: @tertiary-color;
       &.error { border-color: @alert-color; }
       &.warn { border-color: @warning-color; }
       &.success { border-color: @success-color; }
