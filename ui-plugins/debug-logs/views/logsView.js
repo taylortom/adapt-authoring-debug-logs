@@ -75,7 +75,8 @@ define(function(require){
       try {
         const query = [
           `page=${this.model.get('page')}`,
-          `sort=${JSON.stringify(this.model.get('sort'))}`
+          `sort=${JSON.stringify(this.model.get('sort'))}`,
+          `limit=${JSON.stringify(this.model.get('limit'))}`
         ];
         const data = {
           level: { $in: this.model.get('levels') }
