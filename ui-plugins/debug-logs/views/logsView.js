@@ -18,7 +18,8 @@ define(function(require){
       this.model = new Backbone.Model({
         levels: ['error', 'warn', 'success', 'info', 'debug'],
         page: 1,
-        sort: { timestamp: -1 }
+        sort: { timestamp: -1 },
+        limit: 100
       });
       this.listenTo(this.model, 'change:levels change:page change:sort', this.fetchPage)
 
