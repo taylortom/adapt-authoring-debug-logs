@@ -4,36 +4,35 @@
 body.module-debug {
   .debug .view > .logs {
     .panel {
-      position: fixed;
-      top: 120px;
-      right: 0;
-      margin: 20px 30px;
-      width: 250px;
+      padding: 10px;
+      > div {
+        display: inline-block;
+      }
       .nav {
-        margin-bottom: 15px;
+        width: 49%;
         text-align: right;
         button {
           width: 40px;
+          &.first, &.last { width: 45px; }
           background-color: @primary-color;
           color: white;
         }
+        .page-no {
+          margin: 0 10px;
+          font-weight: bold;
+          color: #00dd95;
+        }
       }
       > .filter {
-        display: none;
-        padding: 20px;
-        background: @tertiary-color;
-        border-radius: 3px;
-        color: white;
+        width: 50%;
         > div {
-          margin-bottom: 15px;
-          &:last-child {
-            margin-bottom: 0;
-          }
-  
-          & > h2 {
-            font-size: 110%;
-            margin-bottom: 10px;
-          }
+          display: inline-block;
+          text-align: left;
+          margin-right: 20px;
+        }
+        .level > div {
+          display: inline-block;
+          margin-right: 10px;
         }
       }
     }

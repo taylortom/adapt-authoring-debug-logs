@@ -11,7 +11,7 @@ define(function(require){
       'keydown input': 'updateModel',
       'change': 'fetchPage',
       'click .nav button': 'onNavClicked',
-      'click button.filter': 'onFilterClicked'
+      'click button.refresh': 'fetchPage',
     },
 
     initialize: async function(options) {
@@ -19,7 +19,7 @@ define(function(require){
         levels: ['error', 'warn', 'success', 'info', 'debug'],
         page: 1,
         sort: { timestamp: -1 },
-        limit: 100
+        limit: 50
       });
       this.listenTo(this.model, 'change:levels change:page change:sort', this.fetchPage)
 
@@ -84,26 +84,33 @@ define(function(require){
         if(this.model.has('module')) {
           data.module = this.model.get('module');
         }
-        const logData = await $.post(`/api/logs/query?${query.join('&')}`, data)
-        logData.forEach(l => l.data = l.data.map(d => JSON.stringify(d, null, 2)))
+        const logData = await $.post(`/api/logs/query?${query.join('&')}`, data, (data, status, jqXhr) => {
+          const linkHeader = jqXhr.getResponseHeader('Link');
+          const lastMatch = linkHeader.match(/<[^>]*=(\d+)>; rel="last"/);
+          const lastPage = lastMatch && Number(lastMatch[1]);
+          if(lastPage) this.model.set('lastPage', lastPage);
+        });
+        logData.forEach(l => l.data = l.data.map(d => JSON.stringify(d, null, 2)));
+
+        $('.page-no').text(this.model.get('page'));
         this.model.set('logs', logData);
         this.renderLogs();
 
-        this.fetchTimeout = setTimeout(this.fetchPage.bind(this), 5000);
+        // this.fetchTimeout = setTimeout(this.fetchPage.bind(this), 5000);
 
       } catch(e) {
         console.log(e);
       }
     },
 
-    onFilterClicked: function(e) {
-      $('.panel > .filter').toggle();
-    },
-
     onNavClicked: function(e) {
       const val = $(e.currentTarget).attr('data-value');
       // TODO fix double fetch (model set triggering updateModel)
-      if(val) {
+      if(val === 'first') {
+        this.model.set('page', 1)
+      } else if(val === 'last' && this.model.get('lastPage')) {
+        this.model.set('page', this.model.get('lastPage'))
+      } else if(val) {
         this.model.set('page', this.model.get('page') + Number(val))
       }
     }

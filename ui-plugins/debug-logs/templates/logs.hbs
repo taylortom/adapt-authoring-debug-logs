@@ -1,12 +1,7 @@
 <div class="inner">
   <div class="panel">
-    <div class="nav">
-      <button class="filter"><i class="fa fa-filter"></i></button>
-      <button class="prev" data-value="-1" {{#ifValueEquals page 1}}disabled{{/ifValueEquals}}><i class="fa fa-chevron-left"></i></button>
-      <button class="next" data-value="1"><i class="fa fa-chevron-right"></i></button>
-    </div>
     <div class="filter">
-      <div>
+      <div class="module">
         <h2>Module</h2>
         <input id="module" type="text" value="{{module}}">
       </div>
@@ -33,6 +28,14 @@
           <label for="debug">debug</label>
         </div>
       </div>
+    </div>
+    <div class="nav">
+      <button class="update"><i class="fa fa-refresh"></i></button>
+      <button class="first" data-value="first"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></button>
+      <button class="prev" data-value="-1" {{#ifValueEquals page 1}}disabled{{/ifValueEquals}}><i class="fa fa-chevron-left"></i></button>
+      <span class="page-no"></span>
+      <button class="next" data-value="1"><i class="fa fa-chevron-right"></i></button>
+      <button class="last" data-value="last"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
     </div>
   </div>
   <div class="logs-container">
