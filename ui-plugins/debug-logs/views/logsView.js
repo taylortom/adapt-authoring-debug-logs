@@ -29,7 +29,7 @@ define(function(require){
     },
 
     renderLogs: function() {
-      $logs = $('.logs-container > .logs');
+      const $logs = $('.logs-container > .logs');
       $logs.empty();
       this.model.get('logs').forEach(l => $logs.append(Handlebars.partials.part_log(l)));
     },
