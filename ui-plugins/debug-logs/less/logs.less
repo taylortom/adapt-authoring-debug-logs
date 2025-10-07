@@ -13,6 +13,11 @@ body.module-debug {
         text-align: right;
         button {
           width: 40px;
+          &.disabled { 
+            cursor: default;
+            pointer-events: none;
+            background-color: @disabled-color;
+          }
           &.first, &.last { width: 45px; }
           background-color: @primary-color;
           color: white;

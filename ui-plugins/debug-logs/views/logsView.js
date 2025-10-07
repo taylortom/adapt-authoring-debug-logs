@@ -16,7 +16,8 @@ define(function(require){
 
     initialize: async function(options) {
       this.model = new Backbone.Model({
-        levels: ['error', 'warn', 'success', 'info', 'debug'],
+        allLevels: ['error', 'warn', 'success', 'info', 'debug', 'verbose'],
+        levels: ['error', 'warn', 'success', 'info', 'debug', 'verbose'],
         page: 1,
         sort: { timestamp: -1 },
         limit: 50

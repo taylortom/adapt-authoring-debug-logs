@@ -7,35 +7,21 @@
       </div>
       <div class="level">
         <h2>Level</h2>
-        <div>
-          <input type="checkbox" id="error" name="error" {{#ifArrayIncludes levels 'error'}}checked{{/ifArrayIncludes}} />
-          <label for="error">error</label>
-        </div>
-        <div>
-          <input type="checkbox" id="warn" name="warn" {{#ifArrayIncludes levels 'warn'}}checked{{/ifArrayIncludes}} />
-          <label for="warn">warn</label>
-        </div>
-        <div>
-          <input type="checkbox" id="success" name="success" {{#ifArrayIncludes levels 'success'}}checked{{/ifArrayIncludes}} />
-          <label for="success">success</label>
-        </div>
-        <div>
-          <input type="checkbox" id="info" name="info" {{#ifArrayIncludes levels 'info'}}checked{{/ifArrayIncludes}} />
-          <label for="info">info</label>
-        </div>
-        <div>
-          <input type="checkbox" id="debug" name="debug" {{#ifArrayIncludes levels 'debug'}}checked{{/ifArrayIncludes}} />
-          <label for="debug">debug</label>
-        </div>
+        {{#each allLevels}}
+          <div>
+            <input type="checkbox" id="{{this}}" name="{{this}}" {{#ifArrayIncludes ../levels this}}checked{{/ifArrayIncludes}} />
+            <label for="{{this}}">{{this}}</label>
+          </div>
+        {{/each}}
       </div>
     </div>
     <div class="nav">
       <button class="update"><i class="fa fa-refresh"></i></button>
-      <button class="first" data-value="first"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></button>
-      <button class="prev" data-value="-1" {{#ifValueEquals page 1}}disabled{{/ifValueEquals}}><i class="fa fa-chevron-left"></i></button>
+      <button class="first {{#ifValueEquals page 1}}disabled{{/ifValueEquals}}" data-value="first"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></button>
+      <button class="prev {{#ifValueEquals page 1}}disabled{{/ifValueEquals}}" data-value="-1"><i class="fa fa-chevron-left"></i></button>
       <span class="page-no"></span>
-      <button class="next" data-value="1"><i class="fa fa-chevron-right"></i></button>
-      <button class="last" data-value="last"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
+      <button class="next {{#ifValueEquals page lastPage}}disabled{{/ifValueEquals}}" data-value="1"><i class="fa fa-chevron-right"></i></button>
+      <button class="last {{#ifValueEquals page lastPage}}disabled{{/ifValueEquals}}" data-value="last"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
     </div>
   </div>
   <div class="logs-container">
